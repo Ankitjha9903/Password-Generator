@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator App</title>
+    <style>
+        body {
+            background: #002339;
+            color: #fff;
+        }
+
+        .container {
+            margin: 12%;
+            width: 90%;
+            max-width: 700px;
+        }
+
+        .display {
+            width: 100%;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            background: #fff;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 26px 20px;
+            border-radius: 5px;
+        }
+
+        .display img {
+            width: 30px;
+            height: 40px;
+        }
+
+        .container h1 {
+            font-weight: 500;
+            font-size: 45px;
+        }
+
+        .container h1 span {
+            color: #019f55;
+            border-bottom: 4px solid #019f55;
+            padding-bottom: 7px;
+        }
+
+        .display img {
+            width: 30px;
+            cursor: pointer;
+        }
+
+        .display input {
+            border: 0;
+            outline: 0;
+            font-size: 24px;
+            user-select: none;
+        }
+
+        .container button {
+            border: 0;
+            outline: 0;
+            background: #019f55;
+            color: #fff;
+            font-weight: 300px;
+            font-size: 22px;
+            padding: 16px 26px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Generate a <br> <span>Random Password</span> </h1>
+        <div class="display">
+            <input type="text" id="password" placeholder="Password">
+            <img src="https://w7.pngwing.com/pngs/592/864/png-transparent-computer-icons-icon-design-cut-copy-and-paste-taobao-clothing-promotional-copy-text-rectangle-emoticon-thumbnail.png" onclick="copypassword()"
+                alt="">
+        </div>
+        <button onclick="generatepassword()"> Generate Password</button>
+    </div>
+    <script>
+        const passwordbox = document.getElementById("password");
+        const length = 12;
+        const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const lowercase = "abcdefghijklmnopqrstuvwxyz";
+        const number = "0123456789";
+        const symbols = "!@#$%^&*()_+";
+        const allchars = uppercase + lowercase + number + symbols; // corrected numbers to number
+
+        function generatepassword() {
+            let password = "";
+            password += uppercase[Math.floor(Math.random() * uppercase.length)];
+            password += lowercase[Math.floor(Math.random() * lowercase.length)];
+            password += number[Math.floor(Math.random() * number.length)];
+            password += symbols[Math.floor(Math.random() * symbols.length)];
+
+            while (password.length < length) { // corrected loop condition
+                password += allchars[Math.floor(Math.random() * allchars.length)]; // corrected usage of allchars
+            }
+
+            passwordbox.value = password;
+        }
+        function copypassword(){
+            
+            passwordbox.select();
+            document.execCommand("copy");
+        }
+    </script>
+</body>
+
+</html>
